@@ -1,0 +1,153 @@
+<Button>:
+    size_hint: 0.33, 0.48
+    background_color: 0,0,0,0
+    size: (min(self.width,self.height),min(self.width,self.height)) # force circle
+    color:0,0,0,1
+    canvas.before:
+        Color:
+            rgba: ((0.47,0.55,0.566,1) if self.state == "normal" else (.5,.5,.5,1))
+        Ellipse:
+            pos: self.pos
+            size: self.size
+ 
+<MiniButton@Button>:
+    size_hint: 0.1, 0.1*1.6
+    # size: (min(self.width,self.height),min(self.width,self.height)) # force circle
+    canvas.before:
+        Color:
+            rgba: 1,0.875,0,1
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+<MiniButtonPlay@MiniButton>:
+    canvas.before:
+        Color:
+            rgba: 0.99,0.546,0.78,1
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+
+<MiniButtonStop@MiniButton>:
+    canvas.before:
+        Color:
+            rgba:  ((0.99,0.394,0.269,1) if self.state == "normal" else (.7421875,.1328125,0,1)) 
+        Ellipse:
+            pos: self.pos
+            size: self.size            
+
+<BlackButton@Button>
+    # size: (min(self.width,self.height),min(self.width,self.height)) # force circle
+    canvas.before:
+        Color:
+            rgba: (0,0,0,1)
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+<NeutralButton@Button>
+    # size: (min(self.width,self.height),min(self.width,self.height)) # force circle
+    canvas.before:
+        Color:
+            rgba: .93, 0.906, 0.859, 1
+        Ellipse:
+            pos: self.pos
+            size: self.size           
+
+<Layout>:
+    btn_delam: btn_delam
+    btn_steka: btn_steka
+    btn_configurate: btn_conf
+    kljucna_beseda: kljucna_beseda
+    btn_snemaj:btn_snemaj
+    img_rec:img_rec
+    img_play:img_play
+    img_stop:img_stop
+
+    Button: 
+        id: btn_delam
+        # pos_hint: {"x", "y", "top", "bottom", "left", "right"}
+        pos_hint: {"center_x":0.25, "center_y":0.7}
+        # text: "Kao delam"
+        on_press: root.fake_work(kljucna_beseda)
+
+    Label:
+        font_size: 30
+        color: 0,0,0,1
+        text: "FAKE BROWSING"
+        pos_hint: {"center_x":0.25, "center_y":0.78}
+
+    Label:
+        font_size: 20
+        color: 0,0,0,1
+        text: "Click this circle to start."
+        pos_hint: {"center_x":0.25, "center_y":0.63}
+
+    TextInput:
+        id: kljucna_beseda
+        size_hint: 0.3, 0.06
+        font_size: 20
+        multiline:False
+        hint_text: "keyword to fake browsing"
+        pos_hint: {"center_x":0.25, "center_y":0.7}
+
+    
+    BlackButton:
+        id: btn_steka
+        size_hint: 0.348, 0.5
+        pos_hint: {"center_x":.75, "center_y":0.7}
+        
+
+    NeutralButton:
+        id: btn_steka
+        font_size: 20
+        # text:"BAD VOICING"
+        pos_hint: {"center_x":.75, "center_y":0.7}
+
+
+    # za snemanje zvoka - ko je pritisnjen, ga je treba ponovno pritisniti, da neha
+    
+        
+
+    # za STOP posnetega (če predvajanje se ustavi in gre na začetek)
+    MiniButtonStop:
+        id: btn_predvajaj
+        pos_hint: {"center_x":.83, "center_y":0.75}
+        on_press: root.btn_stop()
+        Image:
+            id: img_stop
+            source: "res/stop.png"
+            center_x: self.parent.center_x 
+            center_y: self.parent.center_y
+        
+    # za play/pause posnetega
+    MiniButtonPlay:
+        id: btn_ustavi
+        pos_hint: {"center_x":.67, "center_y":0.75}
+        on_press: root.btn_play()
+        Image:
+            id: img_play
+            source: "res/play.png"
+            center_x: self.parent.center_x 
+            center_y: self.parent.center_y
+
+    MiniButton:
+        id: btn_snemaj
+        pos_hint: {"center_x":.75, "center_y":0.6}
+        on_press: root.btn_rec()
+        
+        Image:
+            id: img_rec
+            source: "res/record.png"
+            center_x: self.parent.center_x 
+            center_y: self.parent.center_y
+
+    
+    # Windows se posodablja
+    Button: 
+        id: btn_conf
+        pos_hint: {"center_x":0.5, "center_y":0.3}
+        text: "Kao nalaga"
+        on_press: root.win_configurate()
+    
