@@ -5,6 +5,7 @@ from kivy.properties import ObjectProperty
 from kivy.core.window import Window
 from kivy.uix.button import Button
 import os
+from update import windows_update
 # kivy.config.Config.set('graphics', 'resizable', False)
 kivy.config.Config.set('graphics', 'width', '850')
 kivy.config.Config.set('graphics', 'height', '500')
@@ -54,6 +55,7 @@ class Layout(FloatLayout):
 
     def win_configurate(self):
         # TODO - tukaj se kliče predvajanje Windows update videa
+        windows_update()
         pass
 
 
