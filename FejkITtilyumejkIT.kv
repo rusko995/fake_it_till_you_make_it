@@ -12,7 +12,6 @@
  
 <MiniButton@Button>:
     size_hint: 0.1, 0.1*1.6
-    # size: (min(self.width,self.height),min(self.width,self.height)) # force circle
     canvas.before:
         Color:
             rgba: 1,0.875,0,1
@@ -38,13 +37,28 @@
             size: self.size            
 
 <BlackButton@Button>
-    # size: (min(self.width,self.height),min(self.width,self.height)) # force circle
     canvas.before:
         Color:
             rgba: (0,0,0,1)
         Ellipse:
             pos: self.pos
             size: self.size
+
+<PurpleButton@Button>
+    canvas.before:
+        Color:
+            rgba: ((0.49609375,0.43359375,0.9609375, 1) if self.state == "normal" else (0.49609375,0.43359375,0.9609375, 0.8)) 
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+<GreenButton@Button>
+    canvas.before:
+        Color:
+            rgba: ((0.3515625,0.73828125,0.38671875, 1) if self.state == "normal" else (0.3515625,0.73828125,0.38671875, 0.8)) 
+        Ellipse:
+            pos: self.pos
+            size: self.size            
 
 <NeutralButton@Button>
     # size: (min(self.width,self.height),min(self.width,self.height)) # force circle
@@ -65,7 +79,7 @@
     img_play:img_play
     img_stop:img_stop
 
-    Button: 
+    PurpleButton: 
         id: btn_delam
         # pos_hint: {"x", "y", "top", "bottom", "left", "right"}
         pos_hint: {"center_x":0.25, "center_y":0.7}
@@ -145,9 +159,10 @@
 
     
     # Windows se posodablja
-    Button: 
+    GreenButton: 
         id: btn_conf
         pos_hint: {"center_x":0.5, "center_y":0.3}
-        text: "Kao nalaga"
+        font_size: 25
+        text: "fake Windows update"
         on_press: root.win_configurate()
     
