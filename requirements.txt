@@ -1,0 +1,2 @@
+PyAudio==0.2.11
+pynuput==1.7.1
