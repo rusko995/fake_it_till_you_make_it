@@ -6,6 +6,7 @@ from kivy.core.window import Window
 from kivy.uix.button import Button
 import os
 from update import windows_update
+import record_microphone as rm
 # kivy.config.Config.set('graphics', 'resizable', False)
 kivy.config.Config.set('graphics', 'width', '850')
 kivy.config.Config.set('graphics', 'height', '500')
@@ -20,6 +21,11 @@ class Layout(FloatLayout):
     img_play = ObjectProperty(None)
     idx_rec = 1
     idx_play = 1
+    
+    #recording
+#    frame = []
+    def __init__(self):
+        self.record = rm.Record_voice()
 
     def btn_rec(self):
         # TODO - ko se pritisne gumb za snemanje, se sproži ta funkcija
@@ -28,10 +34,12 @@ class Layout(FloatLayout):
             self.img_rec.source = "res/recording.png"
             self.idx_rec = 0
             # lahko se da tudi tukaj timer, ki traja 10 sekund in se potem source postavi nazaj na record in self.idx_rec na 1
+            self.record.start_recording()
         else:
             # ustavil je snemanje
             self.img_rec.source = "res/record.png"
             self.idx_rec = 1
+            self.record.stop_recording()
 
     def btn_play(self):
         # TODO - ko se pritisne ta gumb, je play/pause predvajati fake posnetek
