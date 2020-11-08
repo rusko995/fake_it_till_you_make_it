@@ -44,7 +44,7 @@ def make_it_worse(frames):
 
 class Record_voice():
     
-    def __init__(self,output="new.wav"):
+    def __init__(self,output='output.wav'):
 #        self.record = None
         self.output = output
 #        print("self output is", self.output)
@@ -105,7 +105,7 @@ class Record_voice():
 
 class MyListener(keyboard.Listener):
     global frames
-    def __init__(self,output='new.wav'):
+    def __init__(self,output='output.wav'):
         super(MyListener, self).__init__(self.on_press, self.on_release)
         self.key_pressed = None
         self.record = Record_voice(output)
@@ -138,6 +138,6 @@ class MyListener(keyboard.Listener):
             return (in_data,pyaudio.paContinue)
   
 if  __name__ == "__main__":    
-    listener = MyListener('new.wav' )
+    listener = MyListener('output.wav' )
     listener.start()
             

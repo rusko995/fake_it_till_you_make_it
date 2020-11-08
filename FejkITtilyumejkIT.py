@@ -7,6 +7,7 @@ from kivy.uix.button import Button
 import os
 from update import windows_update
 import record_microphone as rm
+import play
 # kivy.config.Config.set('graphics', 'resizable', False)
 kivy.config.Config.set('graphics', 'width', '850')
 kivy.config.Config.set('graphics', 'height', '500')
@@ -26,6 +27,8 @@ class Layout(FloatLayout):
 #    frame = []
     def __init__(self):
         self.record = rm.Record_voice()
+        self.play = play.Play_voice()
+        
 
     def btn_rec(self):
         # TODO - ko se pritisne gumb za snemanje, se sproži ta funkcija
@@ -47,14 +50,17 @@ class Layout(FloatLayout):
             # začel je snemanje
             self.img_play.source = "res/play.png"
             self.idx_play = 0
+            self.play.play_sound()
             # če pride do konca, daj self.idx_play na 1 (kot da bi kliknil STOP)
         else:
             # ustavil je snemanje
             self.img_play.source = "res/pause.png"
             self.idx_play = 1
+            self.play.pause_sound()
 
     def btn_stop(self):
         # TODO - ustavi predvajanje posnetka in naj gre na začetek
+        self.play.stop_sound()
         pass
 
     def fake_work(self, keyword):
